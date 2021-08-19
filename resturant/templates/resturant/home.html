@@ -3,12 +3,13 @@
 
 {% block content %}
 <script type="text/javascript">
-  document.cookie = "visited=true; path=/";
   const visitedCookie = getCookie('visited');
 
   if(visitedCookie !== "true"){
     alert("This is just a test website. Any payment you submit will be processed and charged to your card. You will recieve no product. By pressing okay you acknowledge and accept.");
   }
+
+  document.cookie = "visited=true; path=/";
 </script>
 
 <link rel="stylesheet" href="{% static 'css/home.css' %}">
