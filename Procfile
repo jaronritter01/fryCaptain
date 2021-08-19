@@ -1,1 +1,1 @@
-web: gunicorn fryCaptain/fryCaptain/wsgi.py --log-file -
+web: gunicorn fryCaptain.wsgi --log-file -
