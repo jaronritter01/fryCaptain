@@ -1,0 +1,32 @@
+#main{
+  text-align: center;
+}
+
+.menu-card{
+  margin: 2em 12em;
+  height: auto;
+  width: 45%;
+}
+
+.main-menu-card{
+  margin: 2em 12em;
+  height: auto;
+  width: 80%;
+}
+
+.menu-li{
+  list-style-type: none;
+}
+
+#title{
+  margin-top: 2em;
+}
+
+.menu-item-name{
+  font-size: 1.2em;
+  font-weight: 600;
+}
+
+.card-button{
+  margin: 1em;
+}

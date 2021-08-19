@@ -1,0 +1,84 @@
+{% extends 'resturant/main.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block content %}
+
+<style>
+  #messages{
+    background-color: grey;
+    color: #fff;
+    padding: 10px;
+    margin-top: 10px;
+  }
+
+  #messages ul{
+    list-style-type: none;
+  }
+
+</style>
+
+<br>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col col-1">
+      <a class=" btn btn-warning" id="return" href="{% url 'admin_menu_item' %}">Return</a>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-5" style="margin: auto;">
+    <div class="card">
+      <div class="card-title">
+        <h2 class='text-center mt-2'>Item Changes</h2>
+      </div>
+      <div class="card-body">
+        <form class="" action="" method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
+          <div class="form-group">
+            <label for="id_name" class='h5'>Item Name</label>
+            {% render_field form.name class="form-control" %}
+          </div>
+
+          <div class="form-group">
+            <label for="id_description" class='h5'>Description</label>
+            {% render_field form.description class="form-control" %}
+          </div>
+
+          <div class="form-group">
+            <label for="id_price" class='h5'>Price</label>
+            {% render_field form.price class="form-control" %}
+          </div>
+
+          <div class="form-group">
+            <label for="id_item_type" class='h5'>Type</label>
+            {% render_field form.item_type class="form-control" %}
+          </div>
+
+          {% if item.item_type == "sauce" %}
+          <div class="form-group">
+            <label for="id_sauce_type" class='h5'>Sauce Type</label>
+            {% render_field form.sauce_type class="form-control" %}
+          </div>
+          {% endif %}
+
+          <div class="form-group">
+            <label for="id_item_pic" class='h5'>Image</label>
+            {% render_field form.item_pic class="form-control" %}
+          </div>
+
+          <div class="text-center">
+            <input type="submit" name="submit" value="Submit Changes" class='btn btn-primary'>
+          </div>
+
+        </form>
+
+        <div class="form-group">
+          <a href="{% url 'delete_item' item.id %}" class='btn btn-danger'>Delete</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

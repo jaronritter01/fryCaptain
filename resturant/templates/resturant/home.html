@@ -1,0 +1,97 @@
+{% extends 'resturant/main.html' %}
+{% load static %}
+
+{% block content %}
+<script type="text/javascript">
+  document.cookie = "visited=true; path=/";
+  const visitedCookie = getCookie('visited');
+
+  if(visitedCookie !== "true"){
+    alert("This is just a test website. Any payment you submit will be processed and charged to your card. You will recieve no product. By pressing okay you acknowledge and accept.");
+  }
+</script>
+
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+
+<div id="body-div">
+
+  <!-- Title section-->
+  <div id='title'>
+    <h1 id='title-heading'>Welcome to Fry Captain's</h1>
+    <p id='tower-text'>Home of the Fryffel Tower</p>
+  </div>
+
+  <div id="image-div">
+    <img src="{% static 'images/resturant-background.jpg' %}" alt="resturant seating" id='resturant-img'>
+  </div>
+
+  <!-- Founders Section -->
+  <div class="container" id='founders-section'>
+
+    <div class="row">
+      <div class="col col-12">
+        <h2 id="founders-title">Founders</h2>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col col-12">
+        <h4 id="founders">Paiton & Jaron </h4>
+      </div>
+    </div>
+
+    <div class="row">
+
+      <div class="col">
+        <div class="card center img-card">
+          <img src="{% static 'images/beachUS.jpg' %}" alt="Jaron" id='card-img-1' class="mx-auto">
+          <caption class="img-cap">This is us during a trip we took to Florida! <br> - 2021</caption>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="card center img-card">
+          <img src="{% static 'images/outSideUs.jpg' %}" alt="Paiton" id='card-img-2' class="mx-auto">
+          <caption class="img-cap">This is a pic from our lake trip! <br> - 2020</caption>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- About Us section-->
+    <div id="about-us" class="container">
+      <div class="card" style="padding: 5%;">
+        <div class="row">
+          <div class="col col-12">
+            <h2 id="about-us-title">About Us</h2>
+          </div>
+        </div>
+        <div class="row">
+          <p id="about-us-p1">I had the idea for the resturant while setting in
+            another that had amazing french fries <i>(Big Whiskeys)</i> and across
+            the table from me was my girlfriend. Now she loves french fries, so I
+            look at her and I say,
+          </p>
+        </div>
+        <div class="row">
+          <p> "What if there was a resturant all about french fries. Would you eat there?".
+          </p>
+        </div>
+        <div class="row">
+          <p>And she said, "Heck yeah I would. That sounds amazing!"</p>
+        </div>
+        <div class="row">
+          <p>
+          And from that day on I've been trying to share our love of french fries
+          to the rest of the world! The best way I could think to do that was to
+          open Fry Captain's.
+          </p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+{% endblock %}

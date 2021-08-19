@@ -1,0 +1,94 @@
+.center{
+  text-align: center;
+}
+
+#body-div{
+  font-family: Montserrat, sans-serif;
+}
+
+#title{
+  text-align: center;
+}
+
+#title-heading{
+  padding: 1em;
+}
+
+#tower-text{
+  font-size: 1.2em;
+}
+
+#image-div{
+  text-align: center;
+  padding-top: 5em;
+  padding-bottom: 12em;
+}
+
+#resturant-img{
+  height: 65vh;
+  border-radius: .75em;
+  border: 1px solid black;
+}
+
+#about-us{
+  padding-bottom: 10em;
+  padding-top: 10em;
+}
+
+#about-us-title{
+  text-align: center;
+  padding-bottom: .75em;
+  text-decoration: underline;
+}
+
+#founders-title{
+  text-align: center;
+  padding-bottom: 2em;
+  text-decoration: underline;
+}
+
+#founders{
+  text-align: center;
+  padding-bottom: 1em;
+}
+
+#card-img-1{
+  margin-top: 1em;
+  margin-bottom: 1em;
+  height: auto;
+  width: 400px;
+  z-index: 0;
+  border-radius: 3em;
+  border: 2px solid #212529;
+}
+
+#card-img-2{
+  margin-top: 1em;
+  margin-bottom: 1em;
+  height: auto;
+  width: 339px;
+  z-index: 0;
+  border-radius: 3em;
+  border: 2px solid #212529;
+}
+
+.img-card{
+  padding-bottom: 1em;
+}
+
+#error-message-div{
+  position: absolute;
+  left: 20%;
+  top: 10%;
+}
+
+#okay-button{
+  width:20%;
+  position: relative;
+  margin: auto;
+}
+
+#error-card{
+  width:110%;
+  border: 1px solid #343A40;
+}

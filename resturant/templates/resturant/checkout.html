@@ -1,0 +1,139 @@
+{% extends "resturant/main.html" %}
+{% load static %}
+{% block content %}
+
+<style media="screen">
+  .checkout{
+    margin: 1em;
+  }
+  .form-field{
+    display: inline-block;
+  }
+</style>
+
+<script type="text/javascript">
+  const orderId = "{{order.id}}";
+  var total = "{{order.get_cart_total}}";
+  const homePage = "{% url 'home' %}";
+</script>
+
+<br>
+<div class="row ml-2 mr-2">
+  <div class="col-lg-6">
+    <div class="box-element" id="form-wrapper">
+      <form class="" action="" method="post" id="form">
+        {% csrf_token %}
+        <div class="" id="user-info">
+          <p>Personal Info</p>
+          <div class="mb-1">
+            <input required class="form-control" type="text" name="name" value="" placeholder="Name..">
+          </div>
+          <div class="">
+            <input required class="form-control" type="email" name="email" value="" placeholder="Email..">
+          </div>
+        </div>
+        <div class="" id="shipping-info">
+          <hr>
+          <p>Delivery Options</p>
+          <div class="form-field">
+            <label for="pickup">Pickup</label>
+            <input type="radio" name="pickup" id="pickup" value="pickup" onclick="isDeliveryClicked()">
+            <label for="delivery">Delivery</label>
+            <input type="radio" name="pickup" id="delivery" value="delivery" onclick="isDeliveryClicked()" checked>
+            {{order.pickup}}
+          </div>
+          <hr>
+          <div id='shipping-form'>
+            <div class="form-field">
+              <input class="form-control checkout" type="text" name="address" placeholder="Address..">
+            </div>
+            <div class="form-field">
+              <input class="form-control checkout" type="text" name="city" placeholder="City..">
+            </div>
+            <div class="form-field">
+              <input class="form-control checkout" type="text" name="state" placeholder="State..">
+            </div>
+            <div class="form-field">
+              <input class="form-control checkout" type="text" name="zipcode" placeholder="Zip code..">
+            </div>
+          </div>
+        </div>
+        <hr>
+        <input type="submit" value="Continue" id="form-button" class="btn btn-success btn-block">
+      </form>
+    </div>
+    <br>
+
+    <div class="box-element d-none" id="payment-info" style="text-align: center;">
+      <small>Payment Options</small>
+      <div id="paypal-button-container"></div>
+    </div>
+  </div>
+
+  <div class="col-lg-6">
+    <div class="box-element">
+      <a class="btn btn-outline-dark" href="{% url 'cart' %}">&#x2190; Back to Cart</a>
+      <hr>
+      <h3>Order Summary</h3>
+      <hr>
+
+      {% for item in items %}
+      <div class="cart-row">
+        <div style="flex:2"><img class="row-image" src="{{item.product.item_pic.url}}" alt="" style="height: 60px;"></div>
+        <div style="flex:2">{{item.product.name}}</div>
+        <div style="flex:1">{{item.product.price|floatformat:2}}</div>
+        <div style="flex:1">{{item.quantity}}</div>
+      </div>
+      {% endfor %}
+
+      <h5>Items: {{order.get_cart_items}}</h5>
+      <h5>Total: {{order.get_cart_total}}</h5>
+    </div>
+  </div>
+</div>
+  <script type="text/javascript" src="{% static 'js/checkout.js' %}"></script>
+
+  <script src="https://www.paypal.com/sdk/js?client-id=AXazEi_itvlBJdvT823mL_FNMov-QiwI_NY9B7dQeILeWGm_XYZjlBobYDlp995Q_bQDVzafZrILzAWc&enable-funding=venmo&currency=USD" data-sdk-integration-source="button-factory"></script>
+  <script>
+    paypal.Buttons({
+
+      style: {
+                color:  'blue',
+                shape:  'pill',
+                label:  'pay',
+                height: 40,
+                size: 'medium'
+            },
+
+            // Set up the transaction
+            createOrder: function(data, actions) {
+                return actions.order.create({
+                    purchase_units: [{
+                        amount: {
+                            value: parseFloat(total).toFixed(2)
+                        }
+                    }]
+                });
+            },
+
+            // Finalize the transaction
+            onApprove: function(data, actions) {
+                return actions.order.capture().then(function(orderData) {
+                    // Successful capture! For demo purposes:
+                    console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+                    var transaction = orderData.purchase_units[0].payments.captures[0];
+
+                    submitFormData()
+                    // Replace the above to show a success message within this page, e.g.
+                    // const element = document.getElementById('paypal-button-container');
+                    // element.innerHTML = '';
+                    // element.innerHTML = '<h3>Thank you for your payment!</h3>';
+                    actions.redirect(homePage);
+                });
+            }
+
+
+        }).render('#paypal-button-container');
+  </script>
+
+{% endblock %}

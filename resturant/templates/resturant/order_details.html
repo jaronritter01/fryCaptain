@@ -1,0 +1,42 @@
+{% extends 'resturant/main.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block content %}
+
+<div class="row mt-4 ml-4 d-flex justify-content-center">
+  <div class="col-md-4">
+    <div class="card">
+      <div class="card-title">
+        <hr>
+        <h2 style="text-align: center;">Order: {% render_field order.transaction_id %}</h2>
+        <hr>
+      </div>
+      <div class="card-body">
+        <h4>Customer: {{order.customer}}</h4>
+        <h4>Pickup:
+          {% if order.pickup %}
+          Yes
+          {% else %}
+          No
+          {% endif %}
+        </h4>
+        <h4>Address:  </h4>
+        {% if not order.pickup %}
+         {{shipping_address}} {{shipping_address.city}}, {{shipping_address.state}} {{shipping_address.zipcode}}
+        {% endif %}
+        <h4>Items: </h4>
+        {% for item in order_items %}
+        {{item.product}} x{{item.quantity}}
+        {% endfor %}
+        <form class="" action="" method="post">
+          {% csrf_token %}
+          <p><span class="h4">Status:</span> {% render_field form.status class="custom-select" %}</p>
+          <button type="submit" name="submit" class="btn btn-info">Update Order</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

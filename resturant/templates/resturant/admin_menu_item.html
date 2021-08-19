@@ -1,0 +1,89 @@
+{% extends 'resturant/main.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block content %}
+
+<br>
+<div class="row">
+  <div class="col-md-3 ml-4">
+    <div class="card card-body">
+      <a class="btn btn-warning" href="{% url 'home' %}"> &#8592; Back to Home</a>
+      <hr>
+      <h3 style="text-align: center">Menu Settings</h3>
+      <hr>
+      <h4>Current Items:</h4>
+      <h6>Click on item for details</h6>
+      {% for item in items %}
+        <p><a href='{% url "admin_detail" item.id %}'>{{item}}</a></p>
+      {% endfor %}
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="card">
+      <div class="card-title">
+        <hr>
+        <h3 style="text-align: center">Add Item</h3>
+        <hr>
+      </div>
+      <div class="card-body">
+        <form class="" action="" method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
+          <div class="form-group">
+            <label for="id_name" class='h5'>Item Name</label>
+            {% render_field form.name class="form-control" %}
+          </div>
+
+          <div class="form-group">
+            <label for="id_description" class='h5'>Description</label>
+            {% render_field form.description class="form-control" %}
+          </div>
+
+          <div class="form-group">
+            <label for="id_price" class='h5'>Price</label>
+            {% render_field form.price class="form-control" %}
+          </div>
+
+          <div class="form-group">
+            <label for="id_item_type" class='h5'>Item Type</label>
+            {% render_field form.item_type class="form-control" %}
+          </div>
+
+          <div class="form-group">
+            <label for="id_item_type" class='h5'>Item Image</label>
+            {% render_field form.item_pic class="form-control" %}
+          </div>
+
+          <div class="text-center">
+            <button type="submit" name="submit" class='btn btn-primary'>Add Item</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-3">
+    <div class="card">
+      <div class="card-title" style="text-align: center">
+        <hr>
+        <h3>Current Orders</h3>
+        <small class="text-muted">Click for details</small>
+        <hr>
+      </div>
+      <div class="card-body">
+        <h5 style="text-decoration: underline;">Confirmed Orders</h5>
+        {% for order in confirmed_orders %}
+          <p><a href="{% url 'order_details' order.id %}">{% render_field order %}</a></p>
+        {% endfor %}
+        <hr>
+        <h5 style="text-decoration: underline;">Orders out for Delivery</h5>
+        {% for order in orders_being_delivered %}
+          <p><a href="{% url 'order_details' order.id %}">{% render_field order %}</a></p>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{% endblock %}
