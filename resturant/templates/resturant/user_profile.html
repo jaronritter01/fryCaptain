@@ -5,25 +5,43 @@
 {% block content %}
 
 <style>
-	.profile-pic{
-    object-fit: cover;
+	.profile-pic {
+		object-fit: cover;
 		width: 200px;
-		height:200px;
+		height: 200px;
 		margin: 0 auto;
 		border-radius: 50%;
 	}
 
+	@media screen and (max-width: 1040px) {
+		.profile-pic {
+			width: 140px;
+			height: 140px;
+		}
+	}
+
+
+	@media screen and (max-width: 768px) {
+		.profile-card {
+			margin: auto;
+			width: 95%;
+		}
+
+		.submit-button-div {
+			text-align: center;
+		}
+	}
 </style>
 
 <br>
-<div class="row">
+<div class="row profile-card">
 	<div class="col-md-3">
-		<div class="card card-body">
+		<div class="card card-body account-settings-card">
 			<a class="btn btn-warning" href="{% url 'home' %}"> &#8592; Back to Home</a>
 			<hr>
 			<h3 style="text-align: center">Account Settings</h3>
 			<hr>
-			<img class="profile-pic" src="{{user.customer.profile_pic.url}}" >
+			<img class="profile-pic" src="{{user.customer.profile_pic.url}}">
 
 		</div>
 	</div>
@@ -44,9 +62,12 @@
 					<label for="phone">Phone Number</label>
 					{% render_field form.phone class='form-control' id='phone' %}
 				</div>
-        <p>{% render_field form.profile_pic %}</p>
-        <p>If you would like to change your password, please click <a href="{% url 'password_change' %}">here</a></p>
-			     <input class="btn login_btn btn-primary" type="submit" value="Submit Changes">
+				<p>{% render_field form.profile_pic %}</p>
+				<p>If you would like to change your password, please click <a
+						href="{% url 'password_change' %}">here</a></p>
+				<div class="submit-button-div">
+					<input class="btn login_btn btn-primary" type="submit" value="Submit Changes" id="submit-button">
+				</div>
 			</form>
 		</div>
 	</div>

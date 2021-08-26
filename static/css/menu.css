@@ -1,15 +1,18 @@
 #main{
   text-align: center;
+  margin-top: 2em;
 }
 
 .menu-card{
-  margin: 2em 12em;
+  margin-right: auto;
+  margin-left: auto;
   height: auto;
   width: 45%;
+  margin-bottom: 2em;;
 }
 
 .main-menu-card{
-  margin: 2em 12em;
+  margin: auto;
   height: auto;
   width: 80%;
 }
@@ -29,4 +32,23 @@
 
 .card-button{
   margin: 1em;
+}
+
+.detail-p{
+  margin-left: 2%;
+  margin-right: 2%;
+  padding: 1em;
+}
+
+@media screen and (max-width: 800px) {
+  .menu-card{
+    height: auto;
+    width: 97%;
+  }
+
+  .main-menu-card{
+    margin: auto;
+    height: auto;
+    width: 90%;
+  }
 }

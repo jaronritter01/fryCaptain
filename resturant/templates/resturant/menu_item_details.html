@@ -23,33 +23,28 @@
   <!-- Pic -->
   <div class="row" id="title-div" style="text-align: center;">
     <div class="col col-12">
-      <img src="{{menu_item_name.item_pic.url}}" style="height: 70%;">
+      <img src="{{menu_item_name.item_pic.url}}" id="menu-item-img">
     </div>
   </div>
 
 
-  <div class="details" style="margin-top: -10%;">
+  <div class="details">
     <!-- Description -->
-    <div class="row">
-      <div class="col col-12">
+    <div class="row desc-card">
+      <div class="col col-12 card desc">
         <p class="text-center">{{menu_item_name.description}}</p>
-      </div>
-    </div>
-
-    <!-- Price -->
-    <div class="row">
-      <div class="col col-12">
+        <!-- Price -->
         <p class="text-center">${{menu_item_name.price}}</p>
       </div>
     </div>
-  </div>
 
-  <div class="row" style="text-align: center;">
-    <div class="col col-12">
-      <button data-product={{menu_item_name.id}} data-action="add" type="button" name="button" class="btn btn-outline-secondary add-btn update-cart" style="margin: auto;">Add To Cart</button>
+    <div class="row button-div" style="text-align: center;">
+      <div class="col col-12">
+        <button data-product={{menu_item_name.id}} data-action="add" type="button" name="button"
+          class="btn btn-outline-secondary add-btn update-cart" style="margin: auto;">Add To Cart</button>
+      </div>
     </div>
+
   </div>
 
-</div>
-
-{% endblock %}
+  {% endblock %}

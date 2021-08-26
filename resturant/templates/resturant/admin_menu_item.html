@@ -4,10 +4,12 @@
 
 {% block content %}
 
+<link href="{% static 'css/admin_menu_item.css' %}" rel="stylesheet">
+
 <br>
 <div class="row">
-  <div class="col-md-3 ml-4">
-    <div class="card card-body">
+  <div class="col-md-3 ml-4 column">
+    <div class="card card-body column-card">
       <a class="btn btn-warning" href="{% url 'home' %}"> &#8592; Back to Home</a>
       <hr>
       <h3 style="text-align: center">Menu Settings</h3>
@@ -15,12 +17,12 @@
       <h4>Current Items:</h4>
       <h6>Click on item for details</h6>
       {% for item in items %}
-        <p><a href='{% url "admin_detail" item.id %}'>{{item}}</a></p>
+      <p><a href='{% url "admin_detail" item.id %}'>{{item}}</a></p>
       {% endfor %}
     </div>
   </div>
-  <div class="col-md-3">
-    <div class="card">
+  <div class="col-md-3 column need-margin">
+    <div class="card column-card card-body">
       <div class="card-title">
         <hr>
         <h3 style="text-align: center">Add Item</h3>
@@ -62,8 +64,8 @@
     </div>
   </div>
 
-  <div class="col-md-3">
-    <div class="card">
+  <div class="col-md-3 column">
+    <div class="card column-card card-body need-margin need-further-margin">
       <div class="card-title" style="text-align: center">
         <hr>
         <h3>Current Orders</h3>
@@ -73,17 +75,19 @@
       <div class="card-body">
         <h5 style="text-decoration: underline;">Confirmed Orders</h5>
         {% for order in confirmed_orders %}
-          <p><a href="{% url 'order_details' order.id %}">{% render_field order %}</a></p>
+        <p><a href="{% url 'order_details' order.id %}">{% render_field order %}</a></p>
         {% endfor %}
         <hr>
         <h5 style="text-decoration: underline;">Orders out for Delivery</h5>
         {% for order in orders_being_delivered %}
-          <p><a href="{% url 'order_details' order.id %}">{% render_field order %}</a></p>
+        <p><a href="{% url 'order_details' order.id %}">{% render_field order %}</a></p>
         {% endfor %}
       </div>
     </div>
   </div>
 </div>
 
+<script src="{% static 'js/jquery-3.6.0.js' %}"></script>
+<script src="{% static 'js/admin_menu_item.js' %}"></script>
 
 {% endblock %}

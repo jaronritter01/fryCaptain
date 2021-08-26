@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
+import dj_database_url
 from pathlib import Path, os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -25,7 +26,8 @@ SECRET_KEY = 'django-insecure-g(u2o)bk7uju707psce3b-l1u8qm90)rlzmi-rgx^@u!0@s*g5
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['https://frycaptain.herokuapp.com', '127.0.0.1', '.herokuapp.com']
+ALLOWED_HOSTS = ['https://frycaptain.herokuapp.com',
+                 '127.0.0.1', '.herokuapp.com']
 
 
 # Application definition
@@ -37,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'resturant.apps.ResturantConfig', #had to be changed to run signals was just 'resturant'
+    # had to be changed to run signals was just 'resturant'
+    'resturant.apps.ResturantConfig',
     'widget_tweaks',
     'storages',
 ]
@@ -83,7 +86,7 @@ DATABASES = {
         'NAME': 'FryCaptainDatabase',
         'USER': 'jaronritter',
         'PASSWORD': 'Jarkadmakpat1!',
-        'HOST' : 'database-1.cgaqctf5in8l.us-east-2.rds.amazonaws.com',
+        'HOST': 'database-1.cgaqctf5in8l.us-east-2.rds.amazonaws.com',
         'PORT': '5432'
     }
 }
@@ -97,7 +100,6 @@ DATABASES = {
 }
 """
 
-import dj_database_url
 db_from_env = dj_database_url.config(conn_max_age=600)
 DATABASES['default'].update(db_from_env)
 
@@ -137,16 +139,16 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files
 
-"""
+
 STATIC_URL = '/static/'
 
-#to let django know where the static files are
+# to let django know where the static files are
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static")
 ]
-"""
 
-#used to specify the media folder
+
+# used to specify the media folder
 """
 MEDIA_URL = '/images/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "static/images")
@@ -157,7 +159,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "static/images")
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-#SMTP ResturantConfig
+# SMTP ResturantConfig
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
@@ -167,7 +169,7 @@ EMAIL_HOST_USER = 'jaronritterwebservices@gmail.com'
 EMAIL_HOST_PASSWORD = 'Jarkadmakpat1!'
 
 
-#S3 Bucket ConFIG
+# S3 Bucket ConFIG
 AWS_ACCESS_KEY_ID = 'AKIAZ6V7AB47XGXPFNUZ'
 AWS_SECRET_ACCESS_KEY = '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'
 AWS_STORAGE_BUCKET_NAME = 'fry-captain-bucket'
@@ -175,7 +177,7 @@ AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
 AWS_S3_HOST = "s3.us-east-2.amazonaws.com"
 AWS_S3_REGION_NAME = "us-east-2"
 AWS_DEFAULT_ACL = 'public-read'
-AWS_S3_OBJECT_PARAMETERS = {'CacheControl' : 'max-age=86400'}
+AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
 
 
 AWS_LOCATION = 'static'
@@ -187,7 +189,8 @@ STATICFILES_STORAGE = 'storages.backends.s3boto3.S3StaticStorage'
 STATIC_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-MEDIA_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, 'media') #look into this and the line below / was "media"
+# look into this and the line below / was "media"
+MEDIA_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, 'media')
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 DEFAULT_FILE_STORAGE = 'fryCaptain.storages.MediaStore'

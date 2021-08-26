@@ -5,117 +5,105 @@
 <link rel="stylesheet" href="{% static 'css/menu.css' %}">
 
 <div id="main">
-<!-- Main Title -->
-  <div class="row">
-    <div class="col">
-      <h1 id="title">Menu</h1>
-    </div>
-  </div>
 
   <!-- Beginning of Menu  -->
   <div class="card main-menu-card">
 
-      <!-- Titles -->
-      <div class="row">
-        <div class="col col-6">
-          <h2 class="mt-2">Choose your Style</h2>
+    <!-- Main Title -->
+    <div class="row">
+      <div class="col">
+        <h1 id="title">Menu</h1>
+      </div>
+    </div>
+
+    <!-- Menu Items -->
+
+    <div class="row">
+      <div class="col col-6 menu-list">
+        <h2 class="mt-2">Choose your Style</h2>
+        {% for item in fries %}
+        <div class="card menu-card">
+          <p class="detail-p">
+            <span class="menu-item-name">{{item}}</span>
+            <br>
+            <br>{{item.description}}
+            <br>${{item.price|floatformat:2}}
+            <br>
+            <a href="{% url 'menu_details' item.id %}" class="btn btn-info card-button">Details</a>
+          </p>
         </div>
-        <div class="col col-6">
-          <h2 class="mt-2">Feeling like more than a snack?</h2>
-        </div>
+        {% endfor %}
       </div>
 
-      <!-- Menu Items -->
-
-      <div class="row">
-        <div class="col col-6">
-          {% for item in fries %}
-            <div class="card menu-card">
-              <img src="{{item.item_pic.url}}" alt="" class="img-fluid">
-              <p>
-                <span class="menu-item-name">{{item}}</span>
-                <br>{{item.description}}
-                <br>${{item.price|floatformat:2}}
-                <br><button data-product={{item.id}} data-action="add" type="button" name="button" class="btn btn-outline-secondary add-btn update-cart">Add To Cart</button>
-                <a href="{% url 'menu_details' item.id %}" class="btn btn-info card-button">Details</a>
-              </p>
-            </div>
-          {% endfor %}
+      <div class="col col-6 menu-list">
+        <h2 class="mt-2">Feeling like more than a snack?</h2>
+        {% for item in entrees %}
+        <div class="card menu-card">
+          <p class="detail-p">
+            <span class="menu-item-name">{{item}}</span>
+            <br>
+            <br>{{item.description}}
+            <br>${{item.price}}
+            <br>
+            <a href="{% url 'menu_details' item.id %}" class="btn btn-info card-button">Details</a>
+          </p>
         </div>
+        {% endfor %}
+      </div>
+    </div>
 
-        <div class="col col-6">
-            {% for item in entrees %}
-            <div class="card menu-card">
-              <img src="{{item.item_pic.url}}" alt="" class="img-fluid">
-              <p>
-                <span class="menu-item-name">{{item}}</span>
-                <br>{{item.description}}
-                <br>${{item.price}}
-                <br><button data-product={{item.id}} data-action="add" type="button" name="button" class="btn btn-outline-secondary add-btn update-cart">Add To Cart</button>
-                <a href="{% url 'menu_details' item.id %}" class="btn btn-info card-button">Details</a>
-              </p>
-            </div>
-            {% endfor %}
+    <hr>
+
+    <!-- Titles -->
+    <div>
+      <h1 class="mb-4">Time to get Saucy!</h1>
+    </div>
+
+    <!-- Menu Items -->
+    <div class="row">
+      <div class="col col-6 menu-list">
+        <h2>Aiolo Sauces</h2>
+        {% for item in aioli_sauces %}
+        <div class="card menu-card align-bottom">
+          <p class="detail-p">
+            <span class="menu-item-name">{{item}}</span>
+            <br>
+            <br>{{item.description}}
+            <br>${{item.price}}
+            <br>
+            <a href="{% url 'menu_details' item.id %}" class="btn btn-info card-button">Details</a>
+          </p>
         </div>
+        {% endfor %}
+      </div>
+      <div class="col col-6 menu-list">
+        <h2>Ketchup Sauces</h2>
+        {% for item in ketchup_sauces %}
+        <div class="card menu-card">
+          <p class="detail-p">
+            <span class="menu-item-name">{{item}}</span>
+            <br>
+            <br>{{item.description}}
+            <br>${{item.price}}
+            <br>
+            <a href="{% url 'menu_details' item.id %}" class="btn btn-info card-button">Details</a>
+          </p>
+        </div>
+        {% endfor %}
       </div>
 
-      <hr>
-
-      <!-- Titles -->
-      <div>
-        <h1 class="mb-4">Time to get Saucy!</h1>
-
-        <div class="row">
-          <div class="col col-6">
-            <h2>Aiolo Sauces</h2>
-          </div>
-
-          <div class="col col-6">
-            <h2>Ketchup Sauces</h2>
-          </div>
+      <div class="row ml-4">
+        <div class="col">
+          <small class="text-muted">*Ask about our secret menu item</small>
         </div>
       </div>
-
-      <!-- Menu Items -->
-      <div class="row">
-        <div class="col col-6">
-            {% for item in aioli_sauces %}
-            <div class="card menu-card align-bottom">
-              <img src="{{item.item_pic.url}}" alt="" class="img-fluid">
-              <p>
-                <span class="menu-item-name">{{item}}</span>
-                <br>{{item.description}}
-                <br>${{item.price}}
-                <br><button data-product={{item.id}} data-action="add" type="button" name="button" class="btn btn-outline-secondary add-btn update-cart">Add To Cart</button>
-                <a href="{% url 'menu_details' item.id %}" class="btn btn-info card-button">Details</a>
-              </p>
-            </div>
-            {% endfor %}
-        </div>
-        <div class="col col-6">
-            {% for item in ketchup_sauces %}
-            <div class="card menu-card">
-              <img src="{{item.item_pic.url}}" alt="" class="img-fluid">
-              <p>
-                <span class="menu-item-name">{{item}}</span>
-                <br>{{item.description}}
-                <br>${{item.price}}
-                <br><button data-product={{item.id}} data-action="add" type="button" name="button" class="btn btn-outline-secondary add-btn update-cart">Add To Cart</button>
-                <a href="{% url 'menu_details' item.id %}" class="btn btn-info card-button">Details</a>
-              </p>
-            </div>
-            {% endfor %}
-        </div>
-
-        <div class="row ml-4">
-          <div class="col">
-            <small class="text-muted">*Ask about our secret menu item</small>
-          </div>
-        </div>
-      </div>
+    </div>
 
 
   </div>
 
 </div>
+
+<script src="{% static 'js/jquery-3.6.0.js' %}"></script>
+<script src="{% static 'js/menu.js' %}"></script>
 {% endblock %}

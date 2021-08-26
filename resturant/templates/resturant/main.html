@@ -2,33 +2,36 @@
 
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}">
-    <title>Fry Captain</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="{% static 'css/main.css' %}">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat" rel="stylesheet">
-    <script type="text/javascript">
-      var user = '{{request.user}}';
 
-      function getToken(name) {
-        let cookieValue = null;
-        if (document.cookie && document.cookie !== '') {
-            const cookies = document.cookie.split(';');
-            for (let i = 0; i < cookies.length; i++) {
-                const cookie = cookies[i].trim();
-                // Does this cookie string begin with the name we want?
-                if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                    break;
-                }
-            }
+<head>
+  <meta charset="utf-8">
+  <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}">
+  <title>Fry Captain</title>
+  <meta name="viewport" content="initial-scale=1">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="{% static 'css/main.css' %}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat" rel="stylesheet">
+  <script type="text/javascript">
+    var user = '{{request.user}}';
+
+    function getToken(name) {
+      let cookieValue = null;
+      if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+          const cookie = cookies[i].trim();
+          // Does this cookie string begin with the name we want?
+          if (cookie.substring(0, name.length + 1) === (name + '=')) {
+            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+            break;
+          }
         }
-        return cookieValue;
       }
+      return cookieValue;
+    }
     const csrftoken = getToken('csrftoken');
 
 
@@ -37,13 +40,13 @@
       var cookieArr = document.cookie.split(";");
 
       //Loop thru the array elements
-      for (var i = 0; i < cookieArr.length; i++){
+      for (var i = 0; i < cookieArr.length; i++) {
         var cookiePair = cookieArr[i].split('=');
 
         /* Removing whitespace at the beginning of the cookie name and compare
         it with the given string
         */
-        if(name == cookiePair[0].trim()) {
+        if (name == cookiePair[0].trim()) {
           //Decode the Cookie value and return
           return decodeURIComponent(cookiePair[1]);
         }
@@ -55,27 +58,35 @@
 
     var cart = JSON.parse(getCookie('cart'))
 
-    if(cart == undefined){
+    if (cart == undefined) {
       cart = {};
       document.cookie = 'cart=' + JSON.stringify(cart) + ";domain=;path=/";
     }
-    </script>
-  </head>
-  <body>
-    {% include 'resturant/navbar.html' %}
-    {% csrf_token %}
-    {% block content %}
+  </script>
+</head>
+
+<body>
+  {% include 'resturant/navbar.html' %}
+  {% csrf_token %}
+  {% block content %}
 
 
-    {% endblock %}
+  {% endblock %}
 
-    {% include 'resturant/footer.html' %}
+  {% include 'resturant/footer.html' %}
 
-    <script src="https://kit.fontawesome.com/6b9316fd80.js" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="{% static 'js/cart.js' %}">
-    </script>
-  </body>
+  <script src="https://kit.fontawesome.com/6b9316fd80.js" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+  <script type="text/javascript" src="{% static 'js/cart.js' %}">
+  </script>
+</body>
+
 </html>
